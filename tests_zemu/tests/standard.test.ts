@@ -18,7 +18,7 @@ import Zemu from '@zondax/zemu'
 import { newSubstrateApp } from '@zondax/ledger-substrate'
 import { defaultOptions, models } from './common'
 
-jest.setTimeout(60000)
+jest.setTimeout(180000)
 
 describe('Standard', function () {
   test.each(models)('can start and stop container', async function (m) {

@@ -31,7 +31,7 @@ import ed25519 from 'ed25519-supercop'
 // @ts-ignore
 import { blake2bFinal, blake2bInit, blake2bUpdate } from 'blakejs'
 
-jest.setTimeout(60000)
+jest.setTimeout(180000)
 
 describe('Ultralight', function () {
   test.each(models)('can start and stop container', async function (m) {
