@@ -1,5 +1,5 @@
 /*******************************************************************************
-*  (c) 2019 - 2022  Zondax AG
+*  (c) 2019 - 2023  Zondax AG
 *
 *  Licensed under the Apache License, Version 2.0 (the "License");
 *  you may not use this file except in compliance with the License.
@@ -190,8 +190,8 @@ parser_error_t _getValue(const compactInt_t *c, uint64_t *v) {
 parser_error_t _toStringCompactInt(const compactInt_t *c,
                                    uint8_t decimalPlaces,
                                    bool trimTrailingZeros,
-                                   char postfix[],
-                                   char prefix[],
+                                   const char postfix[],
+                                   const char prefix[],
                                    char *outValue, uint16_t outValueLen,
                                    uint8_t pageIdx, uint8_t *pageCount) {
     char bufferUI[200];
