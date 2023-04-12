@@ -34,7 +34,7 @@ import { blake2bFinal, blake2bInit, blake2bUpdate } from 'blakejs'
 jest.setTimeout(180000)
 
 describe('Ultralight', function () {
-  test.each(models)('can start and stop container', async function (m) {
+  test.concurrent.each(models)('can start and stop container', async function (m) {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
@@ -43,7 +43,7 @@ describe('Ultralight', function () {
     }
   })
 
-  test.each(models)('sign basic normal', async function (m) {
+  test.concurrent.each(models)('sign basic normal', async function (m) {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
@@ -76,14 +76,14 @@ describe('Ultralight', function () {
         blake2bUpdate(context, txBlob)
         prehash = Buffer.from(blake2bFinal(context))
       }
-      const valid = ed25519.verify(signatureResponse.signature.slice(1), prehash, pubKey)
+      const valid = ed25519.verify(signatureResponse.signature.subarray(1), prehash, pubKey)
       expect(valid).toEqual(true)
     } finally {
       await sim.close()
     }
   })
 
-  test.each(models)('sign basic expert', async function (m) {
+  test.concurrent.each(models)('sign basic expert', async function (m) {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
@@ -122,14 +122,14 @@ describe('Ultralight', function () {
         blake2bUpdate(context, txBlob)
         prehash = Buffer.from(blake2bFinal(context))
       }
-      const valid = ed25519.verify(signatureResponse.signature.slice(1), prehash, pubKey)
+      const valid = ed25519.verify(signatureResponse.signature.subarray(1), prehash, pubKey)
       expect(valid).toEqual(true)
     } finally {
       await sim.close()
     }
   })
 
-  test.each(models)('set balance normal', async function (m) {
+  test.concurrent.each(models)('set balance normal', async function (m) {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
@@ -162,14 +162,14 @@ describe('Ultralight', function () {
         blake2bUpdate(context, txBlob)
         prehash = Buffer.from(blake2bFinal(context))
       }
-      const valid = ed25519.verify(signatureResponse.signature.slice(1), prehash, pubKey)
+      const valid = ed25519.verify(signatureResponse.signature.subarray(1), prehash, pubKey)
       expect(valid).toEqual(true)
     } finally {
       await sim.close()
     }
   })
 
-  test.each(models)('set balance expert', async function (m) {
+  test.concurrent.each(models)('set balance expert', async function (m) {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
@@ -208,14 +208,14 @@ describe('Ultralight', function () {
         blake2bUpdate(context, txBlob)
         prehash = Buffer.from(blake2bFinal(context))
       }
-      const valid = ed25519.verify(signatureResponse.signature.slice(1), prehash, pubKey)
+      const valid = ed25519.verify(signatureResponse.signature.subarray(1), prehash, pubKey)
       expect(valid).toEqual(true)
     } finally {
       await sim.close()
     }
   })
 
-  test.each(models)('force transfer normal', async function (m) {
+  test.concurrent.each(models)('force transfer normal', async function (m) {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
@@ -248,14 +248,14 @@ describe('Ultralight', function () {
         blake2bUpdate(context, txBlob)
         prehash = Buffer.from(blake2bFinal(context))
       }
-      const valid = ed25519.verify(signatureResponse.signature.slice(1), prehash, pubKey)
+      const valid = ed25519.verify(signatureResponse.signature.subarray(1), prehash, pubKey)
       expect(valid).toEqual(true)
     } finally {
       await sim.close()
     }
   })
 
-  test.each(models)('force transfer expert', async function (m) {
+  test.concurrent.each(models)('force transfer expert', async function (m) {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
@@ -294,14 +294,14 @@ describe('Ultralight', function () {
         blake2bUpdate(context, txBlob)
         prehash = Buffer.from(blake2bFinal(context))
       }
-      const valid = ed25519.verify(signatureResponse.signature.slice(1), prehash, pubKey)
+      const valid = ed25519.verify(signatureResponse.signature.subarray(1), prehash, pubKey)
       expect(valid).toEqual(true)
     } finally {
       await sim.close()
     }
   })
 
-  test.each(models)('transfer keep alive normal', async function (m) {
+  test.concurrent.each(models)('transfer keep alive normal', async function (m) {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
@@ -334,14 +334,14 @@ describe('Ultralight', function () {
         blake2bUpdate(context, txBlob)
         prehash = Buffer.from(blake2bFinal(context))
       }
-      const valid = ed25519.verify(signatureResponse.signature.slice(1), prehash, pubKey)
+      const valid = ed25519.verify(signatureResponse.signature.subarray(1), prehash, pubKey)
       expect(valid).toEqual(true)
     } finally {
       await sim.close()
     }
   })
 
-  test.each(models)('transfer keep alive expert', async function (m) {
+  test.concurrent.each(models)('transfer keep alive expert', async function (m) {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
@@ -380,14 +380,14 @@ describe('Ultralight', function () {
         blake2bUpdate(context, txBlob)
         prehash = Buffer.from(blake2bFinal(context))
       }
-      const valid = ed25519.verify(signatureResponse.signature.slice(1), prehash, pubKey)
+      const valid = ed25519.verify(signatureResponse.signature.subarray(1), prehash, pubKey)
       expect(valid).toEqual(true)
     } finally {
       await sim.close()
     }
   })
 
-  test.each(models)('transfer all normal', async function (m) {
+  test.concurrent.each(models)('transfer all normal', async function (m) {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
@@ -420,14 +420,14 @@ describe('Ultralight', function () {
         blake2bUpdate(context, txBlob)
         prehash = Buffer.from(blake2bFinal(context))
       }
-      const valid = ed25519.verify(signatureResponse.signature.slice(1), prehash, pubKey)
+      const valid = ed25519.verify(signatureResponse.signature.subarray(1), prehash, pubKey)
       expect(valid).toEqual(true)
     } finally {
       await sim.close()
     }
   })
 
-  test.each(models)('transfer all expert', async function (m) {
+  test.concurrent.each(models)('transfer all expert', async function (m) {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
@@ -466,14 +466,14 @@ describe('Ultralight', function () {
         blake2bUpdate(context, txBlob)
         prehash = Buffer.from(blake2bFinal(context))
       }
-      const valid = ed25519.verify(signatureResponse.signature.slice(1), prehash, pubKey)
+      const valid = ed25519.verify(signatureResponse.signature.subarray(1), prehash, pubKey)
       expect(valid).toEqual(true)
     } finally {
       await sim.close()
     }
   })
 
-  test.each(models)('force unreserve normal', async function (m) {
+  test.concurrent.each(models)('force unreserve normal', async function (m) {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
@@ -506,14 +506,14 @@ describe('Ultralight', function () {
         blake2bUpdate(context, txBlob)
         prehash = Buffer.from(blake2bFinal(context))
       }
-      const valid = ed25519.verify(signatureResponse.signature.slice(1), prehash, pubKey)
+      const valid = ed25519.verify(signatureResponse.signature.subarray(1), prehash, pubKey)
       expect(valid).toEqual(true)
     } finally {
       await sim.close()
     }
   })
 
-  test.each(models)('force unreserve expert', async function (m) {
+  test.concurrent.each(models)('force unreserve expert', async function (m) {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
@@ -552,7 +552,7 @@ describe('Ultralight', function () {
         blake2bUpdate(context, txBlob)
         prehash = Buffer.from(blake2bFinal(context))
       }
-      const valid = ed25519.verify(signatureResponse.signature.slice(1), prehash, pubKey)
+      const valid = ed25519.verify(signatureResponse.signature.subarray(1), prehash, pubKey)
       expect(valid).toEqual(true)
     } finally {
       await sim.close()
