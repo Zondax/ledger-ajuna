@@ -21,7 +21,7 @@ import { defaultOptions, models } from './common'
 jest.setTimeout(180000)
 
 describe('Standard', function () {
-  test.each(models)('can start and stop container', async function (m) {
+  test.concurrent.each(models)('can start and stop container', async function (m) {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
@@ -30,7 +30,7 @@ describe('Standard', function () {
     }
   })
 
-  test.each(models)('main menu', async function (m) {
+  test.concurrent.each(models)('main menu', async function (m) {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
@@ -40,7 +40,7 @@ describe('Standard', function () {
     }
   })
 
-  test.each(models)('get app version', async function (m) {
+  test.concurrent.each(models)('get app version', async function (m) {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
@@ -60,7 +60,7 @@ describe('Standard', function () {
     }
   })
 
-  test.each(models)('get address', async function (m) {
+  test.concurrent.each(models)('get address', async function (m) {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
@@ -83,7 +83,7 @@ describe('Standard', function () {
     }
   })
 
-  test.each(models)('show address', async function (m) {
+  test.concurrent.each(models)('show address', async function (m) {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
@@ -111,7 +111,7 @@ describe('Standard', function () {
     }
   })
 
-  test.each(models)('show address - reject', async function (m) {
+  test.concurrent.each(models)('show address - reject', async function (m) {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
